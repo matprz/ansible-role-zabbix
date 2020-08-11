@@ -10,9 +10,6 @@
   - net.ipv4.conf.all.accept_redirects: 0
   - net.ipv4.conf.all.send_redirects: 0
 
-- debug:
-    msg: "{{ strongswan_pre_shared_key }}"
-
 - name: Configure ipsec.secrets and ipsec.conf
   template:
     src: "{{ item }}.j2"
