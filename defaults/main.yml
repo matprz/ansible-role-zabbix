@@ -1,0 +1,19 @@
+---
+strongswan_ip_pub_src: "1.1.1.1"
+strongswan_ip_pub_dest: "8.8.8.8"
+
+strongswan_pre_shared_key: ""
+
+strongswan_connection_name: "Maringa-to-SaoPaulo"
+strongswan_authby: "secret"
+strongswan_left: "10.0.0.1"
+strongswan_leftid: "{{ strongswan_ip_pub_src }}"
+strongswan_leftsubnet: "10.0.0.0/24"
+strongswan_right: "{{ strongswan_ip_pub_dest }}"
+strongswan_rightsubnet: "172.0.0.1/32"
+strongswan_ike: "aes256-sha256-modp1024!"
+strongswan_esp: "aes256-sha256-modp1024!"
+strongswan_keyexchange: "ikev1"
+strongswan_keyingtries: 0
+strongswan_ikelifetime: "8h"
+strongswan_lifetime: "1h"

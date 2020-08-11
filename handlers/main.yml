@@ -1,0 +1,10 @@
+---
+- name: Start Strongswan
+  service:
+    name: "{{ strongswan_service }}"
+    state: started
+
+- name: Restart Strongswan
+  service:
+    name: "{{ strongswan_service }}"
+    state: restarted

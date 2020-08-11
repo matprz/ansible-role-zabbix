@@ -1,0 +1,9 @@
+---
+- name: Configure Crontab
+  cron:
+    name: "Force StrongSwan restart"
+    minute: "0"
+    hour: "21,8"
+    user: root
+    job: "service strongswan restart"
+    cron_file: "/etc/crontab"

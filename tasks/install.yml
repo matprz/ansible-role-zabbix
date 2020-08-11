@@ -1,0 +1,22 @@
+---
+- name: Install Dependencies
+  package:
+    name:
+      - vim
+      - telnet
+      - net-tools
+      - wget
+      - curl
+      - tcpdump
+      - openssl
+    state: present
+
+- name: Install Strongswan
+  package:
+    name: strongswan
+    state: present
+
+- name: Enable strongswan service
+  service:
+    name: strongswan
+    enabled: yes

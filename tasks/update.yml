@@ -1,0 +1,11 @@
+---
+- name: System Update
+  package:
+    name: "*"
+    state: latest
+
+- name: Install Epel Repo
+  package:
+    name: epel-release
+    state: present
+    update_cache: yes

@@ -1,0 +1,26 @@
+# ipsec.conf - strongSwan IPsec configuration file
+
+# basic configuration
+config setup
+        charondebug="all"
+        uniqueids=yes
+        strictcrlpolicy=no
+
+# connection to Berlim datacenter
+conn {{ strongswan_connection_name }}
+	authby={{ strongswan_authby }}
+	left={{ strongswan_left }}
+ 	leftid={{ strongswan_leftid }}
+ 	leftsubnet={{ strongswan_leftsubnet }}
+ 	right={{ strongswan_right }}
+	rightsubnet={{ strongswan_rightsubnet }}
+	ike={{ strongswan_ike }}
+	esp={{ strongswan_esp }}
+	keyexchange={{ strongswan_keyexchange }}
+	keyingtries={{ strongswan_keyingtries }}
+	ikelifetime={{ strongswan_ikelifetime }}
+	lifetime={{ strongswan_lifetime }}
+	dpddelay=30
+	dpdtimeout=120
+	dpdaction=restart
+	auto=start

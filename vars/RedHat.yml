@@ -1,0 +1,6 @@
+---
+strongswan_etc_dir: /etc/strongswan
+strongswan_bin: /usr/sbin/strongswan
+strongswan_owner: root
+strongswan_group: root
+strongswan_service: strongswan

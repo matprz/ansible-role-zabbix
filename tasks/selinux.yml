@@ -1,0 +1,4 @@
+---
+- name: Strongswan on {{ ansible_os_family }} | Change SELinux
+  selinux:
+    state: disabled

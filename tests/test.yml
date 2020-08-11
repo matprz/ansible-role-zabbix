@@ -1,0 +1,6 @@
+---
+- hosts: serverstrongswan
+  become: yes
+  remote_user: vagrant
+  roles:
+    - ansible-role-strongswan
