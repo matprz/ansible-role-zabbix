@@ -2,7 +2,7 @@
 strongswan_ip_pub_src: "1.1.1.1"
 strongswan_ip_pub_dest: "8.8.8.8"
 
-strongswan_pre_shared_key: ""
+strongswan_pre_shared_key: "{{ vault_strongswan_pre_shared_key }}"
 
 strongswan_connection_name: "Maringa-to-SaoPaulo"
 strongswan_authby: "secret"

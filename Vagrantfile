@@ -22,44 +22,12 @@ ansible_provision_playbook = ENV["ANSIBLE_PROVISION_PLAYBOOK"] || "test.yml"
 # Define VM images and hostnames
 hosts = [
   {
-    :name     => "ubuntu",
-    :box      => "bento/ubuntu-18.10",
-    :box_v    => "201910.20.0 ",
-    :vm_name  => "vagrant-ubuntu",
-    :hostname => "vagrant-ubuntu.local",
-    :ip       => "172.16.10.11"
-  },
-  {
-    :name     => "centos6",
-    :box      => "bento/centos-6",
-    :box_v    => "201807.12.0",
-    :vm_name  => "vagrant-centos6",
-    :hostname => "vagrant-centos6.local",
-    :ip       => "172.16.10.12"
-  },
-  {
     :name     => "centos7",
     :box      => "bento/centos-7",
     :box_v    => "202002.04.0",
     :vm_name  => "vagrant-centos7",
     :hostname => "vagrant-centos7.local",
-    :ip       => "172.16.10.13"
-  },
-  {
-    :name     => "centos8",
-    :box      => "bento/centos-8.0",
-    :box_v    => "201912.14.0",
-    :vm_name  => "vagrant-centos8",
-    :hostname => "vagrant-centos8.local",
-    :ip       => "172.16.10.14"
-  },
-  {
-    :name     => "freebsd12",
-    :box      => "bento/freebsd-12",
-    :box_v    => "201912.20.0 ",
-    :vm_name  => "vagrant-freebsd12",
-    :hostname => "vagrant-freebsd12.local",
-    :ip       => "172.16.10.15"
+    :ip       => "172.16.10.53"
   }
 ]
 
