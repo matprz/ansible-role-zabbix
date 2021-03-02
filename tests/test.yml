@@ -4,5 +4,5 @@
   remote_user: vagrant
   roles:
     - ansible-role-zabbix
-  vars:
-    vault_strongswan_pre_shared_key: "minhachave"
+#  vars:
+#    vault_strongswan_pre_shared_key: "minhachave"
