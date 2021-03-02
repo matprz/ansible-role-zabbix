@@ -1,22 +1,97 @@
 ---
-- name: Install Dependencies
+- name: Install Zabbix Server
   package:
     name:
-      - vim
-      - telnet
-      - net-tools
-      - wget
-      - curl
-      - tcpdump
-      - openssl
+      - zabbix-server-mysql
+      - zabbix-agent
+      - zabbix-get
     state: present
+  become: yes
 
-- name: Install Strongswan
+- name: Install Zabbix fronted packages
   package:
-    name: strongswan
-    state: present
+    name:
+      - zabbix-web-mysql
+      - zabbix-nginx-conf
+  become: yes
 
-- name: Enable strongswan service
-  service:
-    name: strongswan
+- name: Copy of the Zabbix Server configuration file
+  template:
+    src: zabbix_server.conf.j2
+    dest: /etc/zabbix/zabbix_server.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: True
+
+- name: Copy the PHP configuration file from the Zabbix Server
+  template:
+    src: zabbix.conf.j2
+    dest: /etc/httpd/conf.d/zabbix.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: True
+
+- name: Uncomment line from /etc/nginx/conf.d/zabbix.conf listen
+  lineinfile:
+    path: /etc/nginx/conf.d/zabbix.conf
+    regexp: '^#\s*listen          80.*$'
+    line: 'listen          80;'
+
+- name: Uncomment line from /etc/nginx/conf.d/zabbix.conf server_name
+  lineinfile:
+    path: /etc/nginx/conf.d/zabbix.conf
+    regexp: '^#\s*server_name     example.com.*$'
+    line: 'server_name     localhost;'
+
+- name: Uncomment and set the right timezone
+  lineinfile:
+    path: /etc/php-fpm.d/zabbix.conf
+    regexp: '^;\s*php_value[date.timezone] = Europe/Riga.*$'
+    line: 'php_value[date.timezone] = America/Sao_Paulo'
+
+- name: Imports schema and data
+  shell: zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -pzabbix zabbix
+  become: True
+
+- name: Copy the nginx.conf
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: True
+
+- name: Starts and enables nginx at system startup
+  systemd:
+    name: nginx
     enabled: yes
+    state: started
+  become: True
+  notify: Restart Zabbix_nginx
+
+- name: Starts and enables php-fpm at system startup
+  systemd:
+    name: php-fpm
+    enabled: yes
+    state: started
+  become: True
+  notify: Restart Zabbix_php
+
+- name: Starts and enables the Zabbix Agent at system startup
+  systemd:
+    name: zabbix-agent
+    enabled: yes
+    state: started
+  become: True
+  notify: Restart Zabbix_agent
+
+- name: Starts and enables Zabbix Server at system startup
+  systemd:
+    name: zabbix-server
+    enabled: yes
+    state: started
+  become: True
+  notify: Restart Zabbix_server

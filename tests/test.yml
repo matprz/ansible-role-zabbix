@@ -1,8 +1,8 @@
 ---
-- hosts: serverstrongswan
+- hosts: zabbixserver
   become: yes
   remote_user: vagrant
   roles:
-    - ansible-role-testStrongswan
+    - ansible-role-zabbix
   vars:
     vault_strongswan_pre_shared_key: "minhachave"

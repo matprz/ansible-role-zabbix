@@ -1,10 +1,20 @@
 ---
-- name: Start Strongswan
+- name: Restart Zabbix_nginx
   service:
-    name: "{{ strongswan_service }}"
-    state: started
+    name: "{{ zabbix_nginx }}"
+    state: restarted
 
-- name: Restart Strongswan
+- name: Restart Zabbix_php
   service:
-    name: "{{ strongswan_service }}"
+    name: "{{ zabbix_php }}"
+    state: restarted
+
+- name: Restart Zabbix_server
+  service:
+    name: "{{ zabbix_server }}"
+    state: restarted
+
+- name: Restart Zabbix_agent
+  service:
+    name: "{{ zabbix_agent }}"
     state: restarted

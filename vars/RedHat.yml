@@ -1,6 +1,6 @@
 ---
-strongswan_etc_dir: /etc/strongswan
-strongswan_bin: /usr/sbin/strongswan
-strongswan_owner: root
-strongswan_group: root
-strongswan_service: strongswan
+zabbix_server: zabbix-server
+mysql_root_password: root
+zabbix_nginx: nginx
+zabbix_php: php-fpm
+zabbix_agent: zabbix-agent

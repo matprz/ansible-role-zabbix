@@ -8,7 +8,7 @@ end
 
 # Install public key in VM
 # The public key must be located in ~/.ssh/id_rsa
-ssh_pub_key = File.read("#{Dir.home}/.ssh/id_rsa.pub")
+ssh_pub_key = File.read("#{Dir.home}/.ssh/id_ed25519.pub")
 
 ssh_setup_script = <<-SCRIPT
   ssh_authorized_keys="/home/vagrant/.ssh/authorized_keys"
@@ -28,6 +28,14 @@ hosts = [
     :vm_name  => "vagrant-centos7",
     :hostname => "vagrant-centos7.local",
     :ip       => "172.16.10.53"
+  },
+  {
+    :name     => "centos8",
+    :box      => "bento/centos-8",
+    :box_v    => "202012.21.0",
+    :vm_name  => "vagrant-centos8",
+    :hostname => "vagrant-centos8.local",
+    :ip       => "172.16.10.55"
   }
 ]
 

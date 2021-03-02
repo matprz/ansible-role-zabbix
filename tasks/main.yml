@@ -5,24 +5,19 @@
 - name: Change selinux
   include: "selinux.yml"
   when: ansible_os_family == "RedHat"
-  tags: strongswan:selinux
+  tags: zabbix:selinux
 
 - name: Update machine
   include: "update.yml"
   when: ansible_os_family == "RedHat"
-  tags: strongswan:update
+  tags: zabbix:update
 
-- name: Install strongswan
+- name: Install MariaDB
+  include: "mariadb.yml"
+  when: ansible_os_family == "RedHat"
+  tags: mariadb:install
+
+- name: Install HTTPd e Zabbix Server
   include: "install.yml"
   when: ansible_os_family == "RedHat"
-  tags: strongswan:install
-
-- name: Configure Strongswan
-  include: "configure.yml"
-  when: ansible_os_family == "RedHat"
-  tags: strongswan:configure
-
-- name: Crontab
-  include: "cron.yml"
-  when: ansible_os_family == "RedHat"
-  tags: strongswan:cron
+  tags: zabbix:install
