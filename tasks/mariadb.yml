@@ -6,7 +6,7 @@
       - python3-PyMySQL
     state: latest
 
-- name: Starts and enables MariaDB at system startup
+- name: Start and enable MariaDB at system startup
   systemd:
     name: mariadb
     enabled: yes
