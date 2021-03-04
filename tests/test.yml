@@ -1,7 +1,14 @@
 ---
 - hosts: zabbixserver
   become: yes
-  remote_user: vagrant
+  remote_user: ec2-user
+  pre_tasks: 
+  - name: 'Update repo'
+    raw: 'yum update'
+  - name: 'Install Python'
+    raw: 'yum install -y python'
+  - name: 'Install libselinux-python'
+    raw: 'yum install -y libselinux-python'
   roles:
     - ansible-role-zabbix
 #  vars:

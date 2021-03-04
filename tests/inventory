@@ -1,2 +1,2 @@
 [zabbixserver]
-172.16.10.55
+10.100.5.133 ansible_python_interpreter=python
