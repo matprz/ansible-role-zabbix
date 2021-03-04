@@ -15,7 +15,7 @@
 - name: Install MariaDB
   include: "mariadb.yml"
   when: ansible_os_family == "RedHat"
-  tags: mariadb:install
+  tags: zabbix:mariadb
 
 - name: Install HTTPd e Zabbix Server
   include: "install.yml"

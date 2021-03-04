@@ -8,7 +8,7 @@ end
 
 # Install public key in VM
 # The public key must be located in ~/.ssh/id_rsa
-ssh_pub_key = File.read("#{Dir.home}/.ssh/id_ed25519.pub")
+ssh_pub_key = File.read("#{Dir.home}/.ssh/id_rsa.pub")
 
 ssh_setup_script = <<-SCRIPT
   ssh_authorized_keys="/home/vagrant/.ssh/authorized_keys"
