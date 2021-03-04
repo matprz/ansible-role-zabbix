@@ -1,29 +1,28 @@
 ---
 - name: Install MariaDB
   package: 
-    name: ['mariadb-server','python3-PyMySQL']
+    name:
+      - mariadb-server
+      - python3-PyMySQL
     state: latest
-  become: yes
 
 - name: Starts and enables MariaDB at system startup
   systemd:
     name: mariadb
     enabled: yes
     state: started
-  become: yes
 
 - name: Create the Zabbix database
   mysql_db:
-    name: {{ db_name }}
+    name: "{{ zabbix_db_name }}"
     encoding: utf8
     collation: utf8_bin
     state: present
-  become: yes
 
 - name: Create Zabbix user in the database and configure permissions
   mysql_user:
-    name: {{ db_user }}
-    password: {{ db_password }}
+    name: "{{ zabbix_db_user }}"
+    password: "{{ zabbix_db_password }}"
+    update_password: always
     priv: '*.*:ALL,GRANT'
     state: present
-  become: yes

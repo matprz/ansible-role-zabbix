@@ -4,3 +4,11 @@ mysql_root_password: root
 zabbix_nginx: nginx
 zabbix_php: php-fpm
 zabbix_agent: zabbix-agent
+
+zabbix_server_etc_dir: /etc/zabbix/
+zabbix_server_log_dir: /var/log/zabbix/
+zabbix_server_pid_dir: /var/run/zabbix/
+zabbix_server_lib_dir: /usr/lib/zabbix/
+
+zabbix_nginx_etc_dir: /etc/nginx/
+zabbix_php_etc_dir: /etc/php-fpm.d/
