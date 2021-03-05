@@ -4,12 +4,30 @@
     name: "*"
     state: latest
 
-- name: Install Epel Repo
+- name: Install Epel Repo {{ ansible_os_family }}
   package:
     name:
       - epel-release
       - yum-utils
     state: present
+    when: ansible_os_family == "CentOS"
+
+- name: Install Epel Repo {{ ansible_os_family }}
+  yum_repository:
+    baseurl: https://dl.fedoraproject.org/pub/epel/7Server/x86_64/
+    description: "Epel release."
+    state: present
+    when: 
+      - ansible_os_family == "RedHat"
+      - ansible_distribution == "Amazon"
+
+- name: Install Yum-utils {{ ansible_os_family }}
+  package:
+    name: yum-utils
+    state: present
+    when: 
+      - ansible_os_family == "RedHat"
+      - ansible_distribution == "Amazon"
 
 - name: Install repo Zabbix 5.0
   yum: 
