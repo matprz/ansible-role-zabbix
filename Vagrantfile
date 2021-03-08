@@ -36,6 +36,14 @@ hosts = [
     :vm_name  => "vagrant-centos8",
     :hostname => "vagrant-centos8.local",
     :ip       => "172.16.10.55"
+  },
+  {
+    :name     => "amazonlinux-2",
+    :box      => "bento/amazonlinux-2",
+    :box_v    => "1.2.1",
+    :vm_name  => "vagrant-amazonlinux2",
+    :hostname => "vagrant-amazonlinux2.local",
+    :ip       => "172.16.10.59"
   }
 ]
 
@@ -58,8 +66,8 @@ Vagrant.configure("2") do |config|
       m.vm.provider :virtualbox do |vb|
         vb.name = host[:vm_name]
         vb.gui = false
-        vb.cpus = 1
-        vb.memory = 512
+        vb.cpus = 2
+        vb.memory = 1024
       end
       m.vm.provision "shell", inline: ssh_setup_script, privileged: false
     end

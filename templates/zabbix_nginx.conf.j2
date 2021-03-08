@@ -1,6 +1,6 @@
 server {
         listen          80;
-        server_name     localhost;
+        server_name     {{ server_name }};
 
         root    /usr/share/zabbix;
 
@@ -29,7 +29,8 @@ server {
         }
 
         location ~ [^/]\.php(/|$) {
-                fastcgi_pass    unix:/run/php-fpm/zabbix.sock;
+                fastcgi_pass    unix:/var/opt/rh/rh-php72/run/php-fpm/zabbix.sock;
+#                fastcgi_pass    unix:/var/opt/rh/rh-php73/run/php-fpm/zabbix.sock;
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
                 fastcgi_index   index.php;
 
@@ -53,4 +54,4 @@ server {
                 fastcgi_busy_buffers_size       256k;
                 fastcgi_temp_file_write_size    256k;
         }
-}
+}                                                       

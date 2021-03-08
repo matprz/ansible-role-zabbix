@@ -17,7 +17,7 @@
   when: ansible_os_family == "RedHat"
   tags: zabbix:mariadb
 
-- name: Install HTTPd e Zabbix Server
+- name: Install Nginx e Zabbix Server
   include: "install.yml"
   when: ansible_os_family == "RedHat"
   tags: zabbix:install

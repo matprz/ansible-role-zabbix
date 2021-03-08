@@ -2,9 +2,13 @@
 - name: Install MariaDB
   package: 
     name:
+      - mariadb
       - mariadb-server
-      - python3-PyMySQL
+      - MySQL-python
     state: latest
+
+- name: Install PyMySQL
+  shell: yum install -y MySQL-python
 
 - name: Start and enable MariaDB at system startup
   systemd:

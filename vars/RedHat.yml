@@ -1,8 +1,8 @@
 ---
 zabbix_server: zabbix-server
 mysql_root_password: root
-zabbix_nginx: nginx
-zabbix_php: php-fpm
+zabbix_nginx: rh-nginx116-nginx
+zabbix_php: rh-php72-php-fpm
 zabbix_agent: zabbix-agent
 
 zabbix_server_etc_dir: /etc/zabbix/
@@ -10,5 +10,8 @@ zabbix_server_log_dir: /var/log/zabbix/
 zabbix_server_pid_dir: /var/run/zabbix/
 zabbix_server_lib_dir: /usr/lib/zabbix/
 
-zabbix_nginx_etc_dir: /etc/nginx/
-zabbix_php_etc_dir: /etc/php-fpm.d/
+zabbix_nginx_etc_dir: /etc/opt/rh/rh-nginx116/nginx/conf.d/
+zabbix_nginx_conf_dir: /etc/opt/rh/rh-nginx116/nginx
+zabbix_php_etc_dir: /etc/opt/rh/rh-php72/php-fpm.d/
+
+zabbix_frontend: /etc/yum.repos.d/

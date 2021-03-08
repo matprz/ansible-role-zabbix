@@ -1,17 +1,37 @@
 ---
 - name: Install Zabbix Server
-  package:
+  yum:
     name:
       - zabbix-server-mysql
       - zabbix-agent
       - zabbix-get
     state: present
+    disable_gpg_check: yes
 
-- name: Install Zabbix fronted packages
-  package:
+- name: Install Zabbix Frontend
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ zabbix_frontend }}/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - centos-scl.repo
+
+- name: Update yum_repository
+  shell: yum makecache
+
+- name: Enable Rhel-server
+  shell: sudo yum-config-manager --enable zabbix-frontend
+  when: 
+    - ansible_os_family == "RedHat"
+    - ansible_distribution == "Amazon"
+
+- name: Install Zabbix frontend packages
+  yum:
     name:
-      - zabbix-web-mysql
-      - zabbix-nginx-conf
+      - zabbix-web-mysql-scl
+      - zabbix-nginx-conf-scl
     state: present
 
 - name: Copy of the Zabbix Server configuration file
@@ -51,7 +71,7 @@
 - name: Copy the nginx.conf
   copy:
     src: "{{ item }}"
-    dest: "{{ zabbix_nginx_etc_dir }}/{{ item }}"
+    dest: "{{ zabbix_nginx_conf_dir }}/{{ item }}"
     owner: root
     group: root
     mode: 0644
@@ -60,14 +80,14 @@
 
 - name: Start and enable nginx at system startup
   systemd:
-    name: nginx
+    name: rh-nginx116-nginx
     enabled: yes
     state: started
   notify: Restart Zabbix_nginx
 
 - name: Start and enable php-fpm at system startup
   systemd:
-    name: php-fpm
+    name: rh-php72-php-fpm
     enabled: yes
     state: started
   notify: Restart Zabbix_php

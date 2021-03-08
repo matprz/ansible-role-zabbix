@@ -2,3 +2,27 @@
 - name: Zabbix-server on {{ ansible_os_family }} | Change SELinux
   selinux:
     state: disabled
+    
+- name: Install Python packages to SELinux (RHEL 7)
+  yum:
+    name:
+      - libselinux-python
+      - libsemanage-python
+    state: present
+  register: selinux_install
+  until: selinux_install.rc == 0
+  retries: 2
+  delay: 10
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version is version("8",'<')
+
+- name: Install Python packages to SELinux (RHEL 8)
+  yum:
+    name:
+      - python3-libselinux
+      - python3-libsemanage
+    state: present
+  register: selinux_install
+  until: selinux_install.rc == 0
+  retries: 2
+  delay: 10
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version is version("7",'>')
