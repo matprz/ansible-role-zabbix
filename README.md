@@ -6,15 +6,15 @@ Role for installing and configuring Zabbix 5.0
 Requirements
 ------------
 
-At this moment the script only works on Redhat/Centos 8.x. This script works with MySQL, MariaDB, Nginx and PHP.
+At this moment the script works on Redhat/Centos 8.x., and Amazon linux 2. This script works with MySQL, MariaDB, Nginx and PHP.
 
 Role Variables
 --------------
 
 All variables can be altered in the defaults directory.
 
-defaults/main.yml
-vars/RedHat.yml
+- defaults/main.yml
+- vars/RedHat.yml
 
 Dependencies
 ------------
